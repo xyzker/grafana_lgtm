@@ -3,20 +3,21 @@ storage:
   trace:
     backend: s3
     s3:
-      bucket: tempo-data
-      # Format: http://<helm-release-name>-minio:9000
-      # If you install with 'helm install tempo grafana/tempo', use 'tempo-minio'
-      endpoint: http://tempo-minio:9000
-      access_key: tempo
-      secret_key: tempo123
-      insecure: true # Internal MinIO usually runs on HTTP, so this must be true
-
+      access_key: "grafana-tempo"
+      secret_key: "supersecret"
+      bucket: "tempo-traces"
+      endpoint: "tempo-minio:9000"
+      insecure: true
+# MinIO storage configuration
+# Note: MinIO should not be used for production environments. This is for demonstration purposes only.
 minio:
-  enabled: true # Tempo helm chart deploys minio by default, if you prefer to use your own mimio instance, disable it as i did
-  accessKey: "tempo"    # Create the user for the internal instance
-  secretKey: "tempo123" # Create the password for the internal instance
+  enabled: true
+  mode: standalone
+  rootUser: grafana-tempo
+  rootPassword: supersecret
   buckets:
-    - name: tempo-data  # Automatically create the bucket on startup
+    # Default Tempo storage bucket
+    - name: tempo-traces
       policy: none
       purge: false
 
