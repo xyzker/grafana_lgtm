@@ -49,10 +49,10 @@ loki:
       admin: loki-admin # create this bucket inside your minio instance
     type: s3
     s3:
-      endpoint: http://my-minio:9000 # Enter the url of your minio instance
+      endpoint: http://my-minio.default.svc.cluster.local:9000 # Enter the url of your minio instance
       region: us-east-1 # Enter the region of your minio instance
-      secretAccessKey: myaccesskey # Create Secret and Access key inside you minio instance and type it here
-      accessKeyId: mysecretpassword # Create Secret and Access key inside you minio instance and type it here
+      secretAccessKey: mysecretpassword1 # Create Secret and Access key inside you minio instance and type it here
+      accessKeyId: myaccesskey1 # Create Secret and Access key inside you minio instance and type it here
       s3ForcePathStyle: true
       insecure: false # if your instance does NOT support <<https>>, change it to true
   auth_enabled: false
