@@ -21,6 +21,17 @@ write:
   replicas: 1 # # Modify Number of replicas if you want. The default number of replicas for the write is 3
   persistence:
     storageClass: standard # Choose the storageClass you wanna use
+chunksCache:
+  # This controls the Memcached application's internal memory limit (in MB).
+  # It should be slightly lower than the Kubernetes limit below to prevent OOMKills.
+  allocatedMemory: 1024
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1280Mi
 loki:
   limits_config:
     max_query_lookback: 25h # To avoid querying of data beyond the retention period,max_query_lookback config in limits_config must be set to a value less than or equal to what is set in <<table_manager.retention_period>>
