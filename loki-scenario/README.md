@@ -1,3 +1,17 @@
+## install MinIO
+```shell
+helm repo add minio https://charts.min.io/
+helm repo update
+helm install my-minio minio/minio \
+  --set rootUser=myaccesskey \
+  --set rootPassword=mysecretpassword \
+  --set resources.requests.memory=256Mi \
+  --set resources.limits.memory=512Mi \
+  --set mode=standalone \
+  --set replicas=1
+kubectl port-forward svc/my-minio-console 9001:9001
+```
+
 ## Deploying Grafana Loki on Kubernetes Cluster Using Its Helm Chart
 The original Loki Scalable Helm chart comes with a wide range of default configurations, but I provided an override file named `loki-scalable-values.yml` to specify the values tailored to our deployment needs. You can review this YAML file to further customize configurations, ensuring they align with the specific requirements of your environment.
 
