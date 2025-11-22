@@ -6,7 +6,7 @@ metadata:
     agent: grafana-agent-metrics # This label must match the <<metrics.instanceSelector.matchLabels>> of your GrafanaAgent resource
 spec:
   remoteWrite:
-  - url: http://mimir-nginx.mimir/api/v1/push
+  - url: http://mimir-gateway.mimir.svc/api/v1/push
     headers:
       X-Scope-OrgID: pods # Using this header is OPTIONAL, Multi-tenancy feature of mimir allows you to store metrics inside seperate tenants. in this example i prefer to store pods metrics inside <<pods>> tenant
 

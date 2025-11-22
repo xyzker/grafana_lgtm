@@ -2,11 +2,16 @@ datasources:
   datasources.yaml:
     apiVersion: 1
     datasources:
+      - name: loki
+        type: loki
+        url: http://loki-gateway.loki.svc.cluster.local/
+        access: proxy
+        editable: true
       - name: Mimir-Pods-Tenant # All metrics related to <<pods>> tenant will be stored inside this datasource, because if you look at "jsonData" section, you find out that the value of "X-Scope-OrgID" is "pods"
         type: prometheus
         access: proxy
         orgId: 1
-        url: http://mimir-nginx.mimir.svc.cluster.local/prometheus
+        url: http://mimir-gateway.mimir.svc/prometheus
         isDefault: true
         version: 1
         editable: true
@@ -19,7 +24,7 @@ datasources:
         type: prometheus
         access: proxy
         orgId: 1
-        url: http://mimir-nginx.mimir.svc.cluster.local/prometheus
+        url: http://mimir-gateway.mimir.svc/prometheus
         version: 1
         editable: true
         jsonData:
@@ -32,7 +37,7 @@ datasources:
         type: alertmanager
         access: proxy
         orgId: 1
-        url: http://mimir-nginx.mimir.svc.cluster.local/
+        url: http://mimir-gateway.mimir.svc
         version: 1
         editable: true
         jsonData:
