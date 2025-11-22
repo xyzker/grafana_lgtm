@@ -33,7 +33,7 @@ mimir:
         s3:
           access_key_id: myaccesskey1 # Create Secret and Access key inside you minio instance and type access_key_id here
           bucket_name: mimir-ruler # Create this bucket inside your minio instance
-          endpoint: http://my-minio.default.svc.cluster.local:9000 # Enter the url of your minio instance
+          endpoint: my-minio.default.svc.cluster.local:9000 # Enter the url of your minio instance
           insecure: true # if your instance does NOT support <<https>>, change it to true
           secret_access_key: mysecretpassword1 # Create Secret and Access key inside you minio instance and type secret_access_key here
     blocks_storage:
