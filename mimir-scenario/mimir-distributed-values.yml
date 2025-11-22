@@ -4,16 +4,10 @@ querier:
   replicas: 1 # Modify Number of replicas if you want, The default number of replicas for the querier is 2
 alertmanager:
   fallbackConfig: | # FallbackConfig allows you to define Alertmanager configuration to use for any tenant for which hasn't been specified a configuration yet.
-    route:
-      receiver: 'slack-notifications'
     receivers:
-    - name: 'slack-notifications'
-      slack_configs:
-      - send_resolved: true
-        channel: "#alerting"
-        api_url: "http://mattermost-local:8065/hooks/3g9jfz5tr784zmheu44b6be39o"
-        title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
-        text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
+        - name: default-receiver
+    route:
+        receiver: default-receiver
   persistentVolume:
     storageClass: standard # Choose the storageClass you wanna use
 ingester:
@@ -37,11 +31,11 @@ mimir:
       storage:
         backend: s3
         s3:
-          access_key_id: <ACCESS_KEY_ID> # Create Secret and Access key inside you minio instance and type access_key_id here
+          access_key_id: myaccesskey1 # Create Secret and Access key inside you minio instance and type access_key_id here
           bucket_name: mimir-ruler # Create this bucket inside your minio instance
-          endpoint: <ENDPOINT> # Enter the url of your minio instance
-          insecure: <true|false> # if your instance does NOT support <<https>>, change it to true
-          secret_access_key: <<SECRET_ACCESS_KEY>> # Create Secret and Access key inside you minio instance and type secret_access_key here
+          endpoint: http://my-minio.default.svc.cluster.local:9000 # Enter the url of your minio instance
+          insecure: true # if your instance does NOT support <<https>>, change it to true
+          secret_access_key: mysecretpassword1 # Create Secret and Access key inside you minio instance and type secret_access_key here
     blocks_storage:
       s3:
         bucket_name: mimir-tsdb # Create this bucket inside your minio instance
