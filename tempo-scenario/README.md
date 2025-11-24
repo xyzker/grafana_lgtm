@@ -12,3 +12,10 @@ helm upgrade grafana -n grafana grafana/grafana -f tempo-scenario/all-datasource
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.19.1/cert-manager.yaml
 kubectl apply -f https://github.com/open-telemetry/opentelemetry-operator/releases/latest/download/opentelemetry-operator.yaml
 ```
+
+## install Alloy traces
+```shell
+kubectl create namespace alloy-traces
+kubectl apply -f grafana-alloy-resources/alloy-traces-configMap.yml -n alloy-traces
+helm install alloy-traces grafana/alloy -n alloy-traces -f tempo-scenario/alloy-traces-values.yml
+```
