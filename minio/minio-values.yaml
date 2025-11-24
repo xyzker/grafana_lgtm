@@ -436,6 +436,7 @@ buckets:
   - name: loki-ruler
   - name: mimir-ruler
   - name: mimir-tsdb
+  - name: tempo-traces
   #   # Name of the bucket
   # - name: bucket1
   #   # Policy to be set on the

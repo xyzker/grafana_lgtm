@@ -3,23 +3,14 @@ storage:
   trace:
     backend: s3
     s3:
-      access_key: "grafana-tempo"
-      secret_key: "supersecret"
-      bucket: "tempo-traces"
-      endpoint: "tempo-minio:9000"
-      insecure: true
-# MinIO storage configuration
-# Note: MinIO should not be used for production environments. This is for demonstration purposes only.
+      access_key: myaccesskey1 # Create Secret and Access key inside you minio instance and type access_key here
+      secret_key: mysecretpassword1 # Create Secret and Access key inside you minio instance and type secret_key here
+      bucket: 'tempo-traces' # Create this bucket inside your minio instance
+      endpoint: my-minio.default.svc.cluster.local:9000 # Enter the url of your minio instance
+      insecure: true # if your instance does NOT support <<https>>, change it to true
+
 minio:
-  enabled: true
-  mode: standalone
-  rootUser: grafana-tempo
-  rootPassword: supersecret
-  buckets:
-    # Default Tempo storage bucket
-    - name: tempo-traces
-      policy: none
-      purge: false
+  enabled: false # Tempo helm chart deploys minio by default, if you prefer to use your own mimio instance, disable it as i did
 
 traces: # Based on yout tracing protocol, enable one of them, (otlp|zipkin|jaeger|opencensus). in this example i enabled otlp http and grpc traces
   otlp:
