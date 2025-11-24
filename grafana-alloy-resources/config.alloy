@@ -20,7 +20,7 @@ prometheus.scrape "integrations_node_exporter" {
 
 prometheus.remote_write "integrations" {
 	endpoint {
-		url     = "http://localhost:8090/api/v1/push"
+		url     = "http://mimir-gateway.mimir.svc/api/v1/push"
 		headers = {
 			"X-Scope-OrgID" = "nodes",
 		}
