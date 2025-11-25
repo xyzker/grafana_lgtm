@@ -52,7 +52,7 @@ data:
 
     otelcol.exporter.otlp "tempo" {
       client {
-        endpoint = "http://tempo-distributor.tempo.svc.cluster.local:4317"
+        endpoint = "http://tempo-distributor.tempo.svc.cluster.local:4318"
         tls {
             insecure             = true
             insecure_skip_verify = true
