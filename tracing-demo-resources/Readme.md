@@ -1,6 +1,6 @@
 # command
 ```shell
-docker build -t trace-demo:v4 .
+docker build -t trace-demo:v4 tracing-demo-resources/
 kind load docker-image trace-demo:v4
 kubectl create namespace trace-demo
 kubectl apply -f tracing-demo-resources/deployment.yml
