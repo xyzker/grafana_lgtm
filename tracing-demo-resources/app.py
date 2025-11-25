@@ -1,10 +1,8 @@
-from opentelemetry import trace
-from opentelemetry.sdk.trace import TracerProvider
-
 import logging
 from random import randint
 from flask import Flask, request
 from flask import jsonify
+from opentelemetry import trace
 
 # Configure Flask app
 app = Flask(__name__)
@@ -12,9 +10,6 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Setup OpenTelemetry Manual Instrumentation
-provider = TracerProvider()
-trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 
 def generate_metadata():
