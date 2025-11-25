@@ -12,6 +12,14 @@ data:
          target_label  = "namespace"
        }
        rule {
+         source_labels = ["__meta_kubernetes_pod_label_app"]
+         target_label  = "service_name"
+       }
+       rule {
+         source_labels = ["namespace"]
+         target_label  = "service_namespace"
+       }
+       rule {
          source_labels = ["__meta_kubernetes_pod_name"]
          target_label  = "pod"
        }
@@ -85,6 +93,18 @@ data:
          stage.labels {
            values = {
              stream  = "",
+           }
+         }
+       }
+       stage.match {
+         selector = "{namespace=\"trace-demo\"}"
+         stage.regex {
+           expression = "Response metadata: \\{.*'trace_id': '(?P<trace_id>[0-9a-f]{32})'.*'span_id': '(?P<span_id>[0-9a-f]{16})'"
+         }
+         stage.labels {
+           values = {
+             trace_id = "",
+             span_id = "",
            }
          }
        }
